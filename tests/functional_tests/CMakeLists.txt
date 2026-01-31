@@ -66,6 +66,19 @@ target_link_libraries(make_test_signature
 
 monero_add_minimal_executable(cpu_power_test cpu_power_test.cpp)
 
+monero_add_minimal_executable(get_blocks_bin_test get_blocks_bin_test.cpp)
+target_link_libraries(get_blocks_bin_test
+  PRIVATE
+    cryptonote_core
+    wallet
+    common
+    cncrypto
+    epee
+    ${Boost_REGEX_LIBRARY}
+    ${Boost_PROGRAM_OPTIONS_LIBRARY}
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${EXTRA_LIBRARIES})
+
 find_package(Python3 REQUIRED)
 
 execute_process(COMMAND ${Python3_EXECUTABLE} "-c" "import requests; import psutil; import monotonic; import zmq; import deepdiff; print('OK')" OUTPUT_VARIABLE REQUESTS_OUTPUT OUTPUT_STRIP_TRAILING_WHITESPACE)
